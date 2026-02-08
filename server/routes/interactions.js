@@ -1,30 +1,48 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
+const { z } = require('zod');
 const router = express.Router();
 const { getDb } = require('../db');
+const { validate } = require('../middleware/validate');
+const { ensureGuestId, getActorId } = require('../middleware/actor');
+const { optionalAuthMiddleware } = require('../middleware/auth');
 
-// Record an interaction
-router.post('/', async (req, res) => {
+const interactionLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    limit: 120,
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+const interactionSchema = z.object({
+    body: z.object({
+        quoteId: z.number().int().positive(),
+        interactionType: z.enum(['view', 'like', 'remix', 'share']),
+    }),
+    query: z.object({}).passthrough(),
+    params: z.object({}).passthrough(),
+});
+
+// Record an interaction (guest via cookie, user via JWT)
+router.post('/', interactionLimiter, ensureGuestId, optionalAuthMiddleware, validate(interactionSchema), async (req, res) => {
     try {
-        const { userId, quoteId, interactionType } = req.body;
-
-        if (!userId || !quoteId || !interactionType) {
-            return res.status(400).json({ error: 'Missing required fields' });
-        }
+        const { quoteId, interactionType } = req.validated.body;
+        const actorId = getActorId(req);
 
         const db = await getDb();
 
-        // Ensure user exists (upsert logic basically)
-        // Since we generate UUIDs on client, we need to make sure this user is in the DB before adding interaction
-        // pg-mem might not support ON CONFLICT easily in all versions, but let's try standard INSERT IGNORE equivalent
-
-        const checkUser = await db.query('SELECT id FROM users WHERE id = $1', [userId]);
+        // Ensure actor exists (guest sessions are stored as users with no email)
+        const checkUser = await db.query('SELECT id FROM users WHERE id = $1', [actorId]);
         if (checkUser.rowCount === 0) {
-            await db.query('INSERT INTO users (id, email) VALUES ($1, $2)', [userId, null]);
+            await db.query(
+                'INSERT INTO users (id, email, role, is_verified) VALUES ($1, $2, $3, $4)',
+                [actorId, null, 'guest', false]
+            );
         }
 
         await db.query(
             'INSERT INTO user_interactions (user_id, quote_id, interaction_type) VALUES ($1, $2, $3)',
-            [userId, quoteId, interactionType]
+            [actorId, quoteId, interactionType]
         );
 
         res.json({ success: true });

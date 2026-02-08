@@ -11,6 +11,25 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+.env.deploy
+deployment/deploy.env
+deployment/quoteflow.env
+deployment/keys/
+
+# Environment and secrets
+.env.local
+.env.production
+deployment/.env.production
+server/.env
+*.pem
+*.key
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
 
 # Editor directories and files
 .vscode/*

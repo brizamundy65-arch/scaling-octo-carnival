@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QuoteFlow - Home Feed</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#18181b",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#18181a",
+                        "border-light": "#e4e4e7",
+                        "border-dark": "#27272a",
+                        "pastel-blue": "#eff6ff",
+                        "pastel-green": "#f0fdf4",
+                        "pastel-rose": "#fff1f2",
+                        "pastel-yellow": "#fefce8",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "2xl": "16px", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-primary dark:text-white h-screen overflow-hidden flex">
+<!-- Left Sidebar: Navigation -->
+<aside class="hidden md:flex w-[280px] h-full flex-col border-r border-border-light dark:border-border-dark bg-white/50 dark:bg-black/20 backdrop-blur-sm sticky top-0 shrink-0">
+<div class="flex flex-col h-full p-6 justify-between">
+<div class="flex flex-col gap-8">
+<!-- Logo -->
+<div class="px-2">
+<h1 class="text-primary dark:text-white text-2xl font-bold tracking-tight">QuoteFlow</h1>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-full bg-primary text-white transition-all shadow-sm group" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-sm font-semibold tracking-wide">Home</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 transition-all group" href="#">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+<span class="text-sm font-medium">Explore</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 transition-all group" href="#">
+<span class="material-symbols-outlined text-[24px]">bookmarks</span>
+<span class="text-sm font-medium">Bookmarks</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 transition-all group" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-sm font-medium">Profile</span>
+</a>
+</nav>
+</div>
+<!-- CTA -->
+<button class="w-full py-4 rounded-full bg-primary dark:bg-white text-white dark:text-primary font-bold text-sm tracking-wide shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Create Quote
+            </button>
+<!-- User Mini Profile -->
+<div class="flex items-center gap-3 p-2 mt-auto rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer transition-colors">
+<div class="h-10 w-10 rounded-full bg-zinc-200 bg-center bg-cover" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAZqsOegqfhHo0S1BKwM73dR8CrcNA7ZaU47W55AFG0bqsJJpW4gnqYW4EC94X0zUFZYPXCG7kSzf-9ABxNN9EehD0vssvw1l-7qpW4POb9-N3oN5jCwEMlbMj3Eb20kj7IQBx-0bbmwkShK4z6WI33ARIs8BMbAOj6mmfca0aZ1vs4MJbyGQNjJi5gbQmeCPA_GqseWvef9TWujPICmm8qVKtESVAtLrx9eeB036RFASFsDOl4VtWDVa-mjr26eSWfB5IE7FE83Y0");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-primary dark:text-white">Alex Morgan</span>
+<span class="text-xs text-zinc-500">@alexm_design</span>
+</div>
+<span class="material-symbols-outlined text-zinc-400 ml-auto">more_horiz</span>
+</div>
+</div>
+</aside>
+<!-- Main Feed Area -->
+<main class="flex-1 h-full overflow-y-auto relative no-scrollbar bg-background-light dark:bg-background-dark">
+<div class="max-w-[720px] mx-auto w-full px-4 md:px-8 py-6 flex flex-col gap-8 pb-20">
+<!-- Mobile Header (Visible only on small screens) -->
+<div class="flex md:hidden justify-between items-center mb-2">
+<h1 class="text-primary dark:text-white text-xl font-bold tracking-tight">QuoteFlow</h1>
+<button class="p-2 bg-white rounded-full shadow-sm"><span class="material-symbols-outlined">menu</span></button>
+</div>
+<!-- Search Bar -->
+<div class="sticky top-4 z-20 backdrop-blur-md bg-background-light/80 dark:bg-background-dark/80 pt-2 pb-4 -mx-4 px-4 md:mx-0 md:px-0">
+<div class="flex w-full items-center rounded-xl h-14 bg-white dark:bg-[#27272a] shadow-sm border border-border-light dark:border-border-dark transition-all focus-within:ring-2 focus-within:ring-primary/10">
+<div class="text-zinc-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-transparent border-none focus:ring-0 text-primary dark:text-white placeholder:text-zinc-400 text-base h-full px-3 font-normal" placeholder="Search for inspiration..."/>
+<button class="mr-2 p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-400">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</div>
+<!-- Feed Filter Tabs -->
+<div class="flex gap-2 pb-2">
+<button class="px-5 py-2 rounded-full bg-primary text-white text-sm font-medium shadow-sm">For You</button>
+<button class="px-5 py-2 rounded-full bg-transparent text-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-sm font-medium transition-colors">Following</button>
+<button class="px-5 py-2 rounded-full bg-transparent text-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-sm font-medium transition-colors">Latest</button>
+</div>
+<!-- Quote Card 1: Pastel Blue Accent -->
+<article class="flex flex-col gap-4 bg-pastel-blue dark:bg-slate-900 rounded-[16px] p-6 md:p-8 shadow-sm border-[2px] border-blue-100 dark:border-slate-800 hover:shadow-md transition-shadow duration-300">
+<!-- User Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-full bg-white ring-2 ring-white dark:ring-slate-700 bg-center bg-cover shadow-sm" data-alt="Sarah Jenkins profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBMA8Q3eZxVBkZ2wNgd7ZpODWCxBhnnygge6eFJxZm8FRekiSugTAkx_QLl6UC6MNgb11OwNa1qQRgNA6-Rqz1inRWxOKNloHJfNHLwioLWklXT_VPXiHSMlF8CQKwU902WE1BXqSVmpS0rb2CZntTF9KfzzRMHB8tnpwD0KDN4IPQnrxOM1ljg1IrP2EIANK3mg36pNDU-gDcg8f5qbE2KGHTFurI1fvLLRcvaQrkSeOMvj0P0Ge7gd7vpI23TkN5iFagCL5n3aC8");'></div>
+<div class="flex flex-col">
+<p class="text-primary dark:text-white font-semibold text-base leading-tight">Sarah Jenkins</p>
+<p class="text-zinc-500 dark:text-zinc-400 text-xs font-medium">@sarahj_design · 2h</p>
+</div>
+</div>
+<button class="text-zinc-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Quote Content -->
+<div class="py-2">
+<h2 class="text-primary dark:text-blue-50 text-2xl md:text-3xl font-bold leading-tight tracking-tight">
+                        “Simplicity is the ultimate sophistication. It is not just about removing clutter, but about finding the essence.”
+                    </h2>
+</div>
+<!-- Tags -->
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-white/60 dark:bg-slate-800/60 text-blue-900 dark:text-blue-100 text-xs font-medium border border-blue-200/50 dark:border-slate-700">#Minimalism</span>
+<span class="px-3 py-1 rounded-full bg-white/60 dark:bg-slate-800/60 text-blue-900 dark:text-blue-100 text-xs font-medium border border-blue-200/50 dark:border-slate-700">#DesignThinking</span>
+</div>
+<!-- Footer Actions -->
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-blue-200/50 dark:border-slate-800">
+<div class="flex gap-6">
+<button class="group flex items-center gap-1.5 text-zinc-500 hover:text-pink-500 transition-colors">
+<span class="material-symbols-outlined text-[22px] group-hover:fill-current">favorite</span>
+<span class="text-sm font-medium">243</span>
+</button>
+<button class="group flex items-center gap-1.5 text-zinc-500 hover:text-blue-500 transition-colors">
+<span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+<span class="text-sm font-medium">42</span>
+</button>
+<button class="group flex items-center gap-1.5 text-zinc-500 hover:text-green-500 transition-colors">
+<span class="material-symbols-outlined text-[22px]">repeat</span>
+<span class="text-sm font-medium">18</span>
+</button>
+</div>
+<button class="text-zinc-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">ios_share</span>
+</button>
+</div>
+</article>
+<!-- Quote Card 2: Clean White -->
+<article class="flex flex-col gap-4 bg-white dark:bg-[#1f1f22] rounded-[16px] p-6 md:p-8 shadow-sm border-[2px] border-zinc-100 dark:border-zinc-800 hover:shadow-md transition-shadow duration-300">
+<!-- User Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-full bg-zinc-100 ring-2 ring-zinc-50 dark:ring-zinc-800 bg-center bg-cover shadow-sm" data-alt="Marcus Aurelius statue" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC2JWiKxmvyOVWGjggGLaEVQm42HZBJjR9RKZamIJRSXdrEsZBZVAd1gUzNY1akwDokBYFje_EMGknPK6Gjx79CGg8Xfu4JB9HpWBt9ey5H7E7JnSGp8almGdf5020ukN4fReN2y-8LkwTTOSRSDO8QwnGIS3gjdEel5tkKN3YBBhlUuw7MV7kqEiX1Kd2glnHHIfQ9TpoBtGBJJDWqRkj5KV1nK7nQGhW77WDKP1-XEZco57PvXMVMr5mMHvFjb9Klmzkg8iov9tQ");'></div>
+<div class="flex flex-col">
+<p class="text-primary dark:text-white font-semibold text-base leading-tight">Daily Stoic</p>
+<p class="text-zinc-500 dark:text-zinc-400 text-xs font-medium">@dailystoic · 5h</p>
+</div>
+</div>
+<button class="text-zinc-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Quote Content -->
+<div class="py-2">
+<h2 class="text-primary dark:text-zinc-100 text-2xl md:text-3xl font-serif font-medium italic leading-snug">
+                        "You have power over your mind - not outside events. Realize this, and you will find strength."
+                    </h2>
+</div>
+<!-- Tags -->
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-medium">#Philosophy</span>
+<span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-medium">#Stoicism</span>
+</div>
+<!-- Footer Actions -->
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+<div class="flex gap-6">
+<button class="group flex items-center gap-1.5 text-pink-500 transition-colors">
+<span class="material-symbols-outlined text-[22px] font-variation-fill fill-current">favorite</span>
+<span class="text-sm font-medium">1.2k</span>
+</button>
+<button class="group flex items-center gap-1.5 text-zinc-500 hover:text-blue-500 transition-colors">
+<span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+<span class="text-sm font-medium">89</span>
+</button>
+<button class="group flex items-center gap-1.5 text-zinc-500 hover:text-green-500 transition-colors">
+<span class="material-symbols-outlined text-[22px]">repeat</span>
+<span class="text-sm font-medium">340</span>
+</button>
+</div>
+<button class="text-zinc-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">bookmark</span>
+</button>
+</div>
+</article>
+<!-- Quote Card 3: Pastel Green Accent + Image -->
+<article class="flex flex-col bg-pastel-green dark:bg-emerald-950/30 rounded-[16px] shadow-sm border-[2px] border-green-100 dark:border-emerald-900/50 hover:shadow-md transition-shadow duration-300 overflow-hidden">
+<div class="h-48 w-full bg-cover bg-center" data-alt="Foggy forest landscape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBAp79wWTE5UHLGhiBEcTQQzpz-t4qV1FAxoiSbu_CDqUbr1poKTAL-8j6sY6pEUeOrFeJIiEl4fR8s4F1Q0YtMr6dduowEvuIEjRkozV6lHn9yNlw5HFAZeHN7LfimSPADZASVj5DgffORv-5-7Bz6Ck2DhAyqE7HLYlDSBL1lOOoT-uvPtgfwOcYudD-OXMntbianLMe2t_k5uwFWrXDERzZ2BSP_VxclsefAnCJkRqa6In7B3DG0eHkLWMAgyfmtpFW3DsKHlW8");'>
+<div class="w-full h-full bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+<p class="text-white text-sm font-medium opacity-90 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">location_on</span> Nature's Wisdom</p>
+</div>
+</div>
+<div class="p-6 md:p-8 flex flex-col gap-4">
+<!-- User Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-green-100 bg-center bg-cover shadow-sm" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB26eqasDa4j3t89g3Jg88fe72P9nCyEXGavQdTYhD2UtdV9P2jaMCX9Xkf_8c_dv2LF4iNYHc4myVSxxH8OgxifDxYgZMipuxpQzF9IYN4tY6qyoDRTJcSmSORd-2tsxyWX7C_DIZ91b7AFtxpOTeIbFUaIrsTAGYnL_1a8d6OEuxKykhmq8c_wW2WlIvcqxmru5vITfIMxrR6bvvd00xkZ2rnX84YSPJIYc81twxpeKQM5RtqPDixjPH0Ekd2qVWaayP0EapBSCs");'></div>
+<div class="flex flex-col">
+<p class="text-primary dark:text-white font-semibold text-sm">Elena Woods</p>
+<p class="text-zinc-500 dark:text-zinc-400 text-xs">@elena_w</p>
+</div>
+</div>
+</div>
+<h2 class="text-primary dark:text-emerald-50 text-xl md:text-2xl font-bold leading-relaxed tracking-tight">
+                        "In every walk with nature, one receives far more than he seeks."
+                    </h2>
+<div class="flex items-center justify-between mt-1 pt-4 border-t border-green-200/50 dark:border-emerald-900/50">
+<div class="flex gap-6">
+<button class="group flex items-center gap-1.5 text-zinc-500 hover:text-pink-500 transition-colors">
+<span class="material-symbols-outlined text-[22px]">favorite</span>
+</button>
+<button class="group flex items-center gap-1.5 text-zinc-500 hover:text-blue-500 transition-colors">
+<span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+</button>
+</div>
+<span class="text-xs text-zinc-400 font-medium uppercase tracking-wider">John Muir</span>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Right Sidebar: Trending (Desktop Only) -->
+<aside class="hidden xl:flex w-[320px] flex-col border-l border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-6 gap-8 overflow-y-auto no-scrollbar">
+<!-- Trending Topics -->
+<div class="flex flex-col gap-4">
+<h3 class="text-base font-bold text-primary dark:text-white px-1">Trending Topics</h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full bg-white dark:bg-[#27272a] border border-border-light dark:border-border-dark text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors">#Mindfulness</button>
+<button class="px-4 py-2 rounded-full bg-white dark:bg-[#27272a] border border-border-light dark:border-border-dark text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors">#Creativity</button>
+<button class="px-4 py-2 rounded-full bg-white dark:bg-[#27272a] border border-border-light dark:border-border-dark text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors">#TechLife</button>
+<button class="px-4 py-2 rounded-full bg-white dark:bg-[#27272a] border border-border-light dark:border-border-dark text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors">#Motivation</button>
+<button class="px-4 py-2 rounded-full bg-white dark:bg-[#27272a] border border-border-light dark:border-border-dark text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors">#Stoic</button>
+</div>
+</div>
+<!-- Who to Follow -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center px-1">
+<h3 class="text-base font-bold text-primary dark:text-white">Who to follow</h3>
+<a class="text-xs font-semibold text-zinc-500 hover:text-primary" href="#">See all</a>
+</div>
+<div class="flex flex-col gap-3">
+<!-- User Item 1 -->
+<div class="flex items-center justify-between p-3 rounded-2xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group cursor-pointer bg-white dark:bg-[#1f1f22] shadow-sm border border-transparent hover:border-zinc-200">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-zinc-200 bg-center bg-cover" data-alt="James Clear profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD2fOTyAn_VRu7xEuIgVsy7sRFSrQSZMdCoDbEPJuJdmRfdqx_ZaW9oKGXfrkgaJeS-5eVSojhjXl13VcwOJJr9WLBjg_mufmiBi4USi5Ss8pj0lGKrFpyit0IJTg6tii_zM1269M5n9ETD5puB55y0wGqalnsvHCdEhJHvFB-OiGh2P06nY-dnY_EdHvSI5ujlj29tgo4OYPCLEoAst7x21Itafso9HWtkyLbcJc_WQZm6I8ptntkKeI32NNi3L7xe5_mLEmAqCJw");'></div>
+<div class="flex flex-col">
+<p class="text-sm font-semibold text-primary dark:text-white">James Clear</p>
+<p class="text-xs text-zinc-500">@jamesclear</p>
+</div>
+</div>
+<button class="h-8 w-8 flex items-center justify-center rounded-full bg-zinc-900 text-white dark:bg-white dark:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- User Item 2 -->
+<div class="flex items-center justify-between p-3 rounded-2xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group cursor-pointer bg-white dark:bg-[#1f1f22] shadow-sm border border-transparent hover:border-zinc-200">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-zinc-200 bg-center bg-cover" data-alt="Brené Brown profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBh-NrzSKfbxKtg7K9SZM0uVZchpYsZIxqf3_qB3YflNqBHBsk6dEQtU0NZHdXY2BfIfbcQtBQ2xOFJ0-YMc8un4FtK0pe6SmPqi2N6mSUF0Jj-hFkNbzhMc8MQolTFXJIjirLFPP_Ro6BBRfQx2YpFOq2erSrzV_wFEc8ejcSOr2PgX9Bt4WsgN3_suZsccWuKfZ647MhcQft-IjiYP1BYclzJe9L8YNqb9y0_Cq5HOMe7h7lK9ycSyYvCakCJmv8MK-I5yIoRpm8");'></div>
+<div class="flex flex-col">
+<p class="text-sm font-semibold text-primary dark:text-white">Brené Brown</p>
+<p class="text-xs text-zinc-500">@brenebrown</p>
+</div>
+</div>
+<button class="h-8 w-8 flex items-center justify-center rounded-full bg-zinc-900 text-white dark:bg-white dark:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- User Item 3 -->
+<div class="flex items-center justify-between p-3 rounded-2xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group cursor-pointer bg-white dark:bg-[#1f1f22] shadow-sm border border-transparent hover:border-zinc-200">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-zinc-200 bg-center bg-cover" data-alt="Adam Grant profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD24RJEIdNofSKAw0I6dR45XVr_U9XJq9fcrVI7OFSR-P9fQSEmWAbBoVJOIzZ5PehS9HdXZX55nxy2ZECKE7rP8hgPcI_YRqkCdfJ3QfB-GZJZkCI2qfvTbr-QTPU9eYKUViix4jBxfWYI_CFt0OUt1WD1J9AsZBzwKJWZdHokPSa6AFLzsbdEIEZKXY40zp40hBaBKh8Wh4paS2pNoHI7nFAZaKFrEYu5a01NgoRJZ-YlAXRmkaWS9x8qj3XaSTS0TI5ivzgZVAk");'></div>
+<div class="flex flex-col">
+<p class="text-sm font-semibold text-primary dark:text-white">Adam Grant</p>
+<p class="text-xs text-zinc-500">@adamgrant</p>
+</div>
+</div>
+<button class="h-8 w-8 flex items-center justify-center rounded-full bg-zinc-900 text-white dark:bg-white dark:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Premium Banner -->
+<div class="mt-4 p-5 rounded-2xl bg-gradient-to-br from-primary to-zinc-800 text-white shadow-lg">
+<div class="flex items-start gap-3 mb-3">
+<div class="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
+<span class="material-symbols-outlined text-yellow-300">verified</span>
+</div>
+<div>
+<p class="font-bold text-sm">QuoteFlow Pro</p>
+<p class="text-xs text-zinc-300 mt-1">Unlock exclusive themes and advanced analytics.</p>
+</div>
+</div>
+<button class="w-full py-2 bg-white text-primary text-xs font-bold rounded-lg hover:bg-zinc-100 transition-colors">Try for free</button>
+</div>
+<div class="mt-auto pt-4 text-xs text-zinc-400 flex flex-wrap gap-x-4 gap-y-2 px-1">
+<a class="hover:underline" href="#">Terms</a>
+<a class="hover:underline" href="#">Privacy</a>
+<a class="hover:underline" href="#">Cookies</a>
+<span>© 2024 QuoteFlow</span>
+</div>
+</aside>
+</body></html>

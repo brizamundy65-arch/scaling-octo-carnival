@@ -8,10 +8,7 @@ User=www-data
 WorkingDirectory=/var/www/quoteflow/server
 ExecStart=/usr/bin/node index.js
 Restart=on-failure
-Environment=PORT=3000
-Environment=NODE_ENV=production
-Environment=DATABASE_URL=postgresql://user:password@localhost:5432/quoteflow
-# Environment=USE_REAL_DB=true
+EnvironmentFile=-/etc/quoteflow/quoteflow.env
 
 [Install]
 WantedBy=multi-user.target

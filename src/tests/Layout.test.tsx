@@ -2,19 +2,22 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Layout from '../Layout';
 import { describe, it, expect } from 'vitest';
+import { AuthProvider } from '../contexts/AuthContext';
 
 describe('Layout Navigation', () => {
-  it('renders navigation items', () => {
+  it('renders navigation items', async () => {
     render(
       <BrowserRouter>
-        <Layout />
+        <AuthProvider>
+          <Layout />
+        </AuthProvider>
       </BrowserRouter>
     );
 
     // Get all navigation links
     // Since we now have duplicated links for Desktop (Sidebar) and Mobile (BottomNav),
     // we should see 10 links in total (5 * 2) if both are rendered in the DOM (just hidden by CSS)
-    const links = screen.getAllByRole('link');
+    const links = await screen.findAllByRole('link');
 
     expect(links.length).toBeGreaterThanOrEqual(5);
 

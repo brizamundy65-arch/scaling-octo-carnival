@@ -13,7 +13,7 @@ export default {
 			sm: 'calc(var(--radius) - 4px)'
 		},
 		colors: {
-			background: 'hsl(var(--background))',
+            background: 'hsl(var(--background))',
 			foreground: 'hsl(var(--foreground))',
 			card: {
 				DEFAULT: 'hsl(var(--card))',
@@ -52,8 +52,31 @@ export default {
 				'3': 'hsl(var(--chart-3))',
 				'4': 'hsl(var(--chart-4))',
 				'5': 'hsl(var(--chart-5))'
-			}
-		}
+			},
+            // Custom Design Colors
+            "background-light": "#f7f7f7",
+            "background-dark": "#18181a",
+            "border-light": "#e4e4e7",
+            "border-dark": "#27272a",
+            "pastel-blue": "#eff6ff",
+            "pastel-green": "#f0fdf4",
+            "pastel-rose": "#fff1f2",
+            "pastel-yellow": "#fefce8",
+		},
+        fontFamily: {
+            "display": ["Inter", "sans-serif"]
+        },
+        borderRadius: {
+            lg: 'var(--radius)',
+			md: 'calc(var(--radius) - 2px)',
+			sm: 'calc(var(--radius) - 4px)',
+            "xl": "3rem",
+            "2xl": "16px",
+            "full": "9999px"
+        },
+        transitionTimingFunction: {
+          'apple': 'cubic-bezier(0.32, 0.72, 0, 1)',
+        }
 	}
   },
   plugins: [require("tailwindcss-animate")],

@@ -10,7 +10,11 @@ const state = {
 async function getDb() {
     if (pool) return pool;
 
-    if (process.env.USE_REAL_DB === 'true') {
+    const useRealDb =
+        process.env.USE_REAL_DB === 'true' ||
+        (process.env.NODE_ENV === 'production' && !!process.env.DATABASE_URL);
+
+    if (useRealDb) {
         console.log('Connecting to real PostgreSQL database...');
         pool = new Pool({
             connectionString: process.env.DATABASE_URL,

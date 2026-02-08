@@ -10,7 +10,7 @@ export interface SavedDesign {
   createdAt: number;
 }
 
-const STORAGE_KEY = 'quoteflow_designs';
+const STORAGE_KEY = 'wetalkto_designs';
 
 export const saveDesign = (design: Omit<SavedDesign, 'id' | 'createdAt'>, existingId?: string): SavedDesign => {
   const designs = getDesigns();

@@ -6,6 +6,9 @@
 - Nginx
 - PostgreSQL
 
+## Optional: Deploy Script Config
+If you use `deploy.sh`, create `deployment/deploy.env` from `deployment/deploy.env.example` (keep it out of git).
+
 ## 2. Database Setup
 ```bash
 sudo -u postgres psql
@@ -32,7 +35,7 @@ GRANT ALL PRIVILEGES ON DATABASE quoteflow TO quoteflow_user;
 
 ## 4. Systemd Service
 1. Copy `deployment/quoteflow.service` to `/etc/systemd/system/`.
-2. Edit the file to match your paths and database credentials.
+2. Create `/etc/quoteflow/quoteflow.env` from `deployment/quoteflow.env.example` (store secrets there, not in git).
 3. Enable and start the service:
    ```bash
    sudo systemctl enable quoteflow
@@ -47,6 +50,14 @@ GRANT ALL PRIVILEGES ON DATABASE quoteflow TO quoteflow_user;
    sudo nginx -t
    sudo systemctl restart nginx
    ```
+
+## 7. Seed the Real Database (recommended)
+If you run with `USE_REAL_DB=true`, seed quotes/categories into Postgres:
+```bash
+cd /var/www/quoteflow/server
+DATABASE_URL='postgresql://quoteflow_user:secure_password@localhost:5432/quoteflow' node apply-schema-real-db.js
+DATABASE_URL='postgresql://quoteflow_user:secure_password@localhost:5432/quoteflow' node seed-real-db.js
+```
 
 ## 6. Firewall (UFW)
 ```bash
